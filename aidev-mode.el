@@ -59,7 +59,6 @@
 (defvar aidev-chat-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c C-c") 'aidev-chat-send-buffer-contents)
-    (define-key map (kbd "C-<return>") 'aidev-chat-send-message)
     map)
   "Keymap for AI chat buffer.")
 
@@ -211,6 +210,23 @@
 
     ;; Insert response in the buffer
     (goto-char (point-max))
+
+    ;; Check if the buffer ends with the proper separator
+    ;; If not, ensure we have proper spacing before inserting the AI response
+    (let ((buffer-end (point))
+          (separator-length (length aidev-chat-separator)))
+      (when (< (point-min) buffer-end)
+        ;; Only check if buffer has enough content to possibly contain the separator
+        (if (and (>= (- buffer-end (point-min)) separator-length)
+                 (string= (buffer-substring-no-properties
+                          (- buffer-end separator-length) buffer-end)
+                          aidev-chat-separator))
+            ;; We already have the proper separator at the end
+            nil
+          ;; No separator at end, add it
+          (insert aidev-chat-separator))))
+
+    ;; Insert the AI response with its prefix
     (insert aidev-chat-ai-response-prefix response aidev-chat-separator)
 
     ;; Setup for the next user message
