@@ -59,7 +59,7 @@
 (defvar aidev-chat-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c C-c") 'aidev-chat-send-buffer-contents)
-    (define-key map (kbd "C-return") 'aidev-chat-send-message)
+    (define-key map (kbd "C-<return>") 'aidev-chat-send-message)
     map)
   "Keymap for AI chat buffer.")
 
