@@ -1,8 +1,8 @@
 ;;; aidev-mode.el --- AI-assisted development tools for Emacs -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2025 Your Name Here
+;; Copyright (C) 2025 inaimathi
 
-;; Author: Your Name Here <your.email@example.com>
+;; Author: inaimathi <leo.zovic@example.com>
 ;; Version: 0.1.0
 ;; Package-Requires: ((emacs "27.1"))
 ;; Keywords: tools, convenience, ai
@@ -79,6 +79,8 @@
   (if aidev-mode
       (message "AIdev mode enabled")
     (message "AIdev mode disabled")))
+
+(define-globalized-minor-mode aidev-global-mode aidev-mode (lambda () (aidev-mode 1)))
 
 (defun aidev-insert-chat (prompt)
   "Insert AI-generated content based on PROMPT at point."
