@@ -39,7 +39,7 @@ M-x package-install RET aidev-mode RET
 
 ```elisp
 ;; Enable aidev-mode globally
-(aidev-mode 1)
+(aidev-global-mode 1)
 
 ;; Set AI provider (options: 'ollama, 'openai, 'claude)
 (setq aidev-provider 'ollama)
@@ -92,7 +92,6 @@ The chat buffer has its own minor mode (`aidev-chat-mode`) with these commands:
 | Keybinding | Command | Description |
 |------------|---------|-------------|
 | `C-c C-c` | `aidev-chat-send-buffer-contents` | Send entire buffer contents to AI |
-| `C-return` | `aidev-chat-send-message` | Send selected text or prompt for message to send |
 
 ## License
 
