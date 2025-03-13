@@ -1,4 +1,4 @@
-;;; aidev-mode.el --- AI-assisted development tools for Emacs -*- lexical-binding: t; -*-
+;;; aidev-mode.el --- Minor mode for AI-assisted development -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2025 inaimathi
 
@@ -80,7 +80,7 @@
       (message "AIdev mode enabled")
     (message "AIdev mode disabled")))
 
-(define-globalized-minor-mode aidev-global-mode aidev-mode (lambda () (aidev-mode 1)))
+(define-globalized-minor-mode aidev-global-mode aidev-mode (lambda () (aidev-mode 1)) :require 'aidev-mode)
 
 (defun aidev-insert-chat (prompt)
   "Insert AI-generated content based on PROMPT at point."
