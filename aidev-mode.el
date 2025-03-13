@@ -30,7 +30,7 @@
   :type 'string
   :group 'aidev)
 
-(defcustom aidev-provider 'ollama
+(defcustom aidev-provider 'claude
   "The AI service provider to use."
   :type '(choice
           (const :tag "Ollama" ollama)
@@ -251,7 +251,8 @@
    "\n"))
 
 (defun aidev--prepare-prompt (prompt &optional include-region)
-  "Prepare the PROMPT, optionally including the active region if INCLUDE-REGION is non-nil."
+  "Prepare the PROMPT, optionally including the active region
+if INCLUDE-REGION is non-nil."
   `(,@(when (and include-region (region-active-p))
         `((("role" . "user") ("content" . ,(buffer-substring-no-properties (region-beginning) (region-end))))))
     (("role" . "user") ("content" . ,prompt))))
@@ -308,7 +309,7 @@
                           :nowait t)))
                (set-process-sentinel
                 proc
-                (lambda (proc event)
+                (lambda (_ event)
                   (when (string-match "open" event)
                     (setq connected t))))
                (sleep-for 0.2)
@@ -351,13 +352,15 @@ SYSTEM is an optional system prompt."
           (goto-char (point-min))
           (re-search-forward "^$")
           (forward-char)
-          (setq response (json-read)))
+	  (let ((js (json-read)))
+	    (setq response js)))
       (kill-buffer response-buffer))
     (cdr (assoc 'response response))))
 
 (defun aidev---decode-utf8-string (str)
   "Fix misencoded UTF-8 characters in STR.
-Replaces misencoded em-dashes and typographic quotes with standard ASCII equivalents."
+Replaces misencoded em-dashes and typographic quotes
+with standard ASCII equivalents."
   (let ((result str))
     ;; Replace misencoded em-dash (â) with hyphen (-)
     (setq result (replace-regexp-in-string "â" "-" result))
