@@ -115,7 +115,7 @@
     (insert (aidev--invert-markdown-code data))))
 
 (defun aidev-new-buffer-from-chat (prompt)
-  "Creates a new buffer with the result of a chat request using PROMPT."
+  "Create a new buffer with the result of a chat request using PROMPT."
   (interactive "sPrompt: ")
   (let* ((system (aidev--prepare-system-message
                   "The likeliest requests involve generating code. If you are asked to generate code, only return code, and no commentary. If you must, provide minor points and/or testing examples in the form of code comments (commented in the appropriate syntax) but no longer prose unless explicitly requested."))
@@ -251,7 +251,8 @@
    "\n"))
 
 (defun aidev--prepare-prompt (prompt &optional include-region)
-  "Prepare the PROMPT, optionally including the active region
+  "Prepare the PROMPT.
+Optionally including the active region
 if INCLUDE-REGION is non-nil."
   `(,@(when (and include-region (region-active-p))
         `((("role" . "user") ("content" . ,(buffer-substring-no-properties (region-beginning) (region-end))))))
