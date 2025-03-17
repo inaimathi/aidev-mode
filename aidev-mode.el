@@ -4,9 +4,10 @@
 
 ;; Author: inaimathi <leo.zovic@example.com>
 ;; Version: 0.1.0
-;; Package-Requires: ((emacs "27.1"))
+;; Package-Requires: ((emacs "27.1") (request "0.3.2"))
 ;; Keywords: tools, convenience, ai
-;; URL: https://github.com/yourusername/aidev-mode
+;; URL: https://github.com/inaimathi/aidev-mode
+;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:
 
@@ -199,7 +200,7 @@
   (push `(("role" . "user") ("content" . ,message)) aidev-chat-messages)
 
   ;; If we're sending a message from a region, make sure it appears in the buffer
-  (when (and (region-active-p) (not (= (point) (point-max))))
+  (when (and (region-active-p) (not (eobp)))
     (goto-char (point-max))
     (insert aidev-chat-user-prompt-prefix message aidev-chat-separator))
 
