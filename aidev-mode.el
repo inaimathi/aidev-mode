@@ -7,7 +7,7 @@
 ;; Package-Requires: ((emacs "27.1") (request "0.3.2"))
 ;; Keywords: tools, convenience, ai
 ;; URL: https://github.com/inaimathi/aidev-mode
-;; SPDX-License-Identifier: GPL-3.0
+;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:
 
